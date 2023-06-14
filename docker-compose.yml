@@ -13,4 +13,8 @@ services:
     restart: always
     ports:
       - 3000:3000
-    image: node:14-alpine
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://postgres:hamza@localhost:5432/postgres

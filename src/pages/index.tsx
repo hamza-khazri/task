@@ -31,9 +31,9 @@ const Home: NextPage = () => {
     }));
   };
   
-  const submitData = async (e: React.SyntheticEvent) => {
+  const submitData = async (e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
-    await setError(false);
+    setError(false);
     console.log(formData);
     if(formData.bach_model != "" && formData.quantity > 0 && formData.license >= 0 ){
       const data = await axios.post("/api/batch", formData);
@@ -42,8 +42,7 @@ const Home: NextPage = () => {
       console.log("data is missing");
       setError(true);
     }
-
-  };
+  }
 
   return (
     <>
@@ -54,6 +53,7 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-[#201f1f]">
         <form
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onSubmit={submitData}
           action=""
           className="w-11/12 max-w-2xl rounded-lg border-2 border-yellow-500 p-10"

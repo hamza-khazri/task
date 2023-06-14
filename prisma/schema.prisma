@@ -16,12 +16,20 @@ datasource db {
 }
 
 model Bach {
-    id                 Int   @id @default(autoincrement())
-    bach_model         String   
-    date               DateTime    
-    quantity           Int
-    license            Int
-    comment            String
-    createdAt          DateTime @default(now())
+  id          Int       @id @default(autoincrement())
+  bach_model  String
+  date        DateTime
+  quantity    Int
+  license     Int
+  comment     String
+  createdAt   DateTime  @default(now())
 
+  machines    Machine[]
+}
+
+model Machine {
+  machine_id      Int      @id @default(autoincrement())
+  serial_number   Int
+  bach            Bach     @relation(fields: [bach_id], references: [id])
+  bach_id         Int
 }
